@@ -1,7 +1,9 @@
 import { title } from 'process';
 import * as getClueFromPromise from 'promise-version.js';
+import * as getClueFromAsyncFunction from 'async-await-version.js';
 
 const usePromiseButton = document.getElementById('use-promise');
+const useAsyncButton = document.getElementById('use-async-await')
 const questionDiv = document.getElementById('question');
 const answerDiv = document.getElementById('answer');
 const valueDiv = document.getElementById('value');
@@ -26,6 +28,24 @@ window.addEventListener("DOMContentLoaded", () => {
             .catch(err => {
                 console.error(err.message);
             })
+    })
+
+    useAsyncButton.addEventListener('click', async () => {
+        try {
+            let clue = await getClueFromAsyncFunction();
+            questionDiv.innerHTML = clue.question;
+            answerDiv.innerHTML = clue.answer;
+            valueDiv.innerHTML = clue.value;
+            categoryTitleDiv.innerHTML = clue.category.title;
+            if (clue.invalidCount && clue.invalidCount > 0) {
+                invalidCountDiv.innerHTML = 'invalid';
+            }
+            else {
+                invalidCountDiv.innerHTML = 'valid';
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
     })
 
 

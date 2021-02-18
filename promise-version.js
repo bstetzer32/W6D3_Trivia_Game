@@ -12,4 +12,3 @@ export function getClue() {
             })
             .catch(err => console.log(err));
 }
-
